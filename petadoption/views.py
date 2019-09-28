@@ -11,6 +11,7 @@ def user_register(request):
         if form.is_valid():
             a = "abc"
             b="adasda"
+            c="sefes"
     else:
         return render(request, '')
 # def login_user(request):
