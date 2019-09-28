@@ -10,6 +10,7 @@ def user_register(request):
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             a = "abc"
+            b="adasda"
     else:
         return render(request, '')
 # def login_user(request):
