@@ -9,7 +9,7 @@ def user_register(request):
     if request.method == 'POST':
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
-            a = "a"
+            a = "abc"
     else:
         return render(request, '')
 # def login_user(request):
