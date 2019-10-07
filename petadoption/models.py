@@ -1,14 +1,15 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
-
-class User(models.Model):
-    email = models.EmailField(max_length=128, primary_key=True)
-    fname = models.CharField(max_length=128, null=False, blank=False, default='fname')
-    lname = models.CharField(max_length=128, null=False, blank=False, default='lname')
-    password = models.CharField(max_length=128, default='pass')
-
-    def __str__(self):
-        return self.fname + " " + self.lname
+class MyUser(AbstractUser):
+    username = models.CharField(primary_key=True, max_length=128)
+    # email = models.EmailField(max_length=128, primary_key=True)
+    #first_name = models.CharField(max_length=128, null=False, blank=False, default='fname')
+    # last_name = models.CharField(max_length=128, null=False, blank=False, default='lname')
+    # password = models.CharField(max_length=128, default='pass')
+    #def __str__(self):
+    #    return self.fname + " " + self.lname
 
 
 # class User(models.Model):
@@ -37,7 +38,7 @@ class Pet(models.Model):
     ]
     pet_id = models.CharField(max_length=128, primary_key=True)
     pet_name = models.CharField(max_length=128, null=False, blank=False, default='Pets name')
-    owner = models.ForeignKey('User', on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     animal_type = models.CharField(max_length=1, choices=pet_choices)
     Up_for_Adoption = models.CharField(max_length=1, choices=adoption_choices, default='N')
     pet_profile_image = models.ImageField(null=False)
@@ -59,7 +60,7 @@ class Pet_Photos(models.Model):
 class Comments(models.Model):
     picture_id = models.ForeignKey('Pet_Photos', on_delete=models.CASCADE)
     comment_no = models.CharField(max_length=128, primary_key=True)
-    comment_writer = models.ForeignKey('User', on_delete=models.CASCADE)
+    comment_writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     comment = models.CharField(max_length=128, null=False, blank=False, default='Comment')
 
     def __str__(self):
@@ -70,7 +71,7 @@ class Adoption_requests(models.Model):
     request_no = models.CharField(max_length=128, primary_key=True)
     requester_name = models.CharField(max_length=128, null=False, blank=False, default='Your name')
     requester_phone_no = models.CharField(max_length=10, null=False, blank=False, default='Yor phone no')
-    requester_email = models.ForeignKey('User', on_delete=models.CASCADE)
+    requester_email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     request_description = models.TextField(max_length=500)
 
     def __str__(self):
