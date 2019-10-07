@@ -4,12 +4,20 @@ from django.conf import settings
 
 class MyUser(AbstractUser):
     username = models.CharField(primary_key=True, max_length=128)
-    # email = models.EmailField(max_length=128, primary_key=True)
-    #first_name = models.CharField(max_length=128, null=False, blank=False, default='fname')
-    # last_name = models.CharField(max_length=128, null=False, blank=False, default='lname')
-    # password = models.CharField(max_length=128, default='pass')
-    #def __str__(self):
-    #    return self.fname + " " + self.lname
+    email = models.EmailField(max_length=128)
+    first_name = models.CharField(max_length=128)
+    last_name = models.CharField(max_length=128)
+    password = models.CharField(max_length=128)
+    def __str__(self):
+        return self.fname + " " + self.lname
+# class MyUser(AbstractUser):
+#     username = models.CharField(primary_key=True, max_length=128)
+#     email = models.EmailField(max_length=128, null=False, blank=False)
+#     first_name = models.CharField(max_length=128, null=False, blank=False, default='fname')
+#     last_name = models.CharField(max_length=128, null=False, blank=False, default='lname')
+#     password = models.CharField(max_length=128, default='pass')
+#     def __str__(self):
+#         return self.fname + " " + self.lname
 
 
 # class User(models.Model):
