@@ -44,16 +44,16 @@ class Pet(models.Model):
         (yes, 'Yes'),
         (no, 'No'),
     ]
-    pet_id = models.CharField(max_length=128, primary_key=True)
+    #pet_id = models.CharField(max_length=128, primary_key=True)
     pet_name = models.CharField(max_length=128, null=False, blank=False, default='Pets name')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     animal_type = models.CharField(max_length=1, choices=pet_choices)
-    Up_for_Adoption = models.CharField(max_length=1, choices=adoption_choices, default='N')
-    pet_profile_image = models.ImageField(null=False)
+    up_for_adoption = models.CharField(max_length=1, choices=adoption_choices, default='N')
+    pet_profile_image = models.ImageField(blank=True, upload_to = settings.MEDIA_ROOT)
     description = models.TextField(max_length=128)
 
     def __str__(self):
-        return self.pet_id
+        return self.pet_name
 
 
 class Pet_Photos(models.Model):

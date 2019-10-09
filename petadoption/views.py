@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from .forms import UserRegisterForm, UserLoginForm
+from .forms import UserRegisterForm, PetRegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import MyUser
+from .models import MyUser, Pet
 
 
 # Create your views here.
@@ -63,6 +63,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
+                messages.success(request, 'You have logged in successfully')
                 return HttpResponseRedirect(reverse('explore'))
             else:
                 return HttpResponse("Your account was inactive.")
@@ -72,13 +73,38 @@ def user_login(request):
             #print("Someone tried to login and failed.")
             #print("They used username: {} and password: {}".format(username,password))
             messages.error(request,'Invalid Login Details!')
-            check=True
             #template="reservation/login.html"
             #return HttpResponse("Invalid Details")
     return render(request, 'login.html')
 
 def explore(request):
     return render(request, 'explore.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    messages.success(request, 'You have logged out successfully')
+    return HttpResponseRedirect(reverse('user_login'))
+
+
+
+@login_required
+def pet_register(request):
+    if request.method == 'POST':
+        pet_form = PetRegisterForm(request.POST, request.FILES)
+        if pet_form.is_valid:
+            mypet = pet_form.save(commit=False)
+            mypet.owner = request.user
+            mypet.save()
+            messages.success(request, 'Pet Successfully Added')
+            return HttpResponseRedirect(reverse('explore'))
+        else:
+            messages.error(request, 'Incorrect details')
+            #return render(request, 'SignUp.html',{'form':form})
+
+    else:
+        pet_form = PetRegisterForm()
+    return render(request, 'petregister.html',{'form':pet_form})
 
 
 def user_register(request):
