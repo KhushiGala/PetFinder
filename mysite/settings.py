@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+from django.urls import reverse
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -134,8 +134,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'petadoption','static'), )
-LOGIN_REDIRECT_URL = 'explore'
-LOGIN_URL = ''
+LOGIN_REDIRECT_URL = '/explore/'
+LOGIN_URL = '/'

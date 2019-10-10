@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,14 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/bootstrap.css">
-    <link rel="stylesheet" href="../static/css/animate.css">
-    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../static/fonts/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="../static/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
     <!-- Theme Style -->
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
   </head>
   <body>
     <div class="wrap">
@@ -22,7 +23,7 @@
                 <div class="row pt-5">
                     <div class="col-12 text-center">
                       <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                      <h1 class="site-logo"><a href="explore.html">Paw</a></h1>
+                      <h1 class="site-logo"><a href="{% url 'explore' %}">Paw</a></h1>
                   </div>
                 </div>
               </div>
@@ -69,7 +70,7 @@
               <div class="col-md-12">
           <div class="owl-carousel owl-theme home-slider">
                     <div>
-                        <a href="#" class="a-block d-flex align-items-center height-lg" style="background-image: url('../static/images/puppies_2.jpg'); ">
+                        <a href="#" class="a-block d-flex align-items-center height-lg" style="background-image: url('{% static 'images/puppies_2.jpg' %}'); ">
                           <div class="text half-to-full">
                               <h3>How to Find the The Perfect Pet</h3>
                               <p>We give the choices You end up choosing </p>
@@ -77,7 +78,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="#" class="a-block d-flex align-items-center height-lg" style="background-image: url('../static/images/119884lpr.jpg'); ">
+                        <a href="#" class="a-block d-flex align-items-center height-lg" style="background-image: url('{% static 'images/119884lpr.jpg' %}'); ">
                           <div class="text half-to-full">
                               <h3>How to Find the The Perfect Pet</h3>
                             <p>We give the choices You end up choosing </p>
@@ -85,7 +86,7 @@
                         </a>
                     </div>
                     <div>
-                      <a href="#" class="a-block d-flex align-items-center height-lg" style="background-image: url('../static/images/LOVELY_pets_1.jpg'); ">
+                      <a href="#" class="a-block d-flex align-items-center height-lg" style="background-image: url('{% static 'images/LOVELY_pets_1.jpg' %}'); ">
                           <div class="text half-to-full">
                               <h3>How to Find the The Perfect Pet</h3>
                               <p>We give the choices You end up choosing </p>
@@ -93,7 +94,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="#" class="a-block d-flex align-items-center height-lg" style="background-image: url('../static/images/untitled.png'); ">
+                        <a href="#" class="a-block d-flex align-items-center height-lg" style="background-image: url('{% static 'images/untitled.png'); ">
                           <div class="text half-to-full">
                               <h3>How to Find the The Perfect Pet</h3>
                               <p>We give the choices You end up choosing </p>
@@ -105,22 +106,39 @@
           </div>
         </div>
   </section>
+  {%  if pet_list %}
   <section class="site-section py-sm">
         <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
-                 <h2 class="mb-4">Pets Up for Adoption</h2>
+                 <h2 class="mb-4">All Pets</h2>
               </div>
           </div>
-            <div class="row blog-entries">
+          <div class="row blog-entries">
+            <div class="col-md-12 text-center">
+                <div class="row">
+            {% for pet in pet_list %}
+            <div class="col-md-3">
+              <a href="blog-single-Nala.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
+                  <img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="Image placeholder">
+                  <div class="blog-content-body">
+                      <div class="post-meta">
+                        <!-- <span class="author mr-2"><img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="Colorlib"></span> -->
+                      </div>
+                      <h2>{{ pet.pet_name }}</h2>
+                  </div>
+                </a>
+            </div>
+            {% endfor %}
+            <!-- <div class="row blog-entries">
               <div class="col-md-12 text-center">
                   <div class="row">
                     <div class="col-md-3">
                       <a href="blog-single-Nala.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Nala/Nala_3(2).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Nala/Nala_3(2).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Nala/Nala_4(2).jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Nala/Nala_4(2).jpg' %}" alt="Colorlib"></span>
                               </div>
                               <h2>Nala</h2>
                           </div>
@@ -128,10 +146,10 @@
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Apollo the k9/apollo-the-k9-5.jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Apollo the k9/apollo-the-k9-5.jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Apollo the k9/apollo-the-k9-7.jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Apollo the k9/apollo-the-k9-7.jpg' %}" alt="Colorlib"></span>
                               </div>
                               <h2>Apollo the K9</h2>
                           </div>
@@ -139,10 +157,10 @@
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Bub/Bub_2(2).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Bub/Bub_2(2).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Bub/Bub_3(2).jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Bub/Bub_3(2).jpg' %}" alt="Colorlib"></span>
                               </div>
                               <h2>Lil Bub</h2>
                           </div>
@@ -150,10 +168,10 @@
                     </div>
                     <div class="col-md-3">
                       <a href="blog-single.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Broley blue/D5QuVlCX4AA9tNW(3).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Broley blue/D5QuVlCX4AA9tNW(3).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Broley blue/unnamed.jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Broley blue/unnamed.jpg' %}" alt="Colorlib"></span>
                               </div>
                               <h2>Broley Blue</h2>
                           </div>
@@ -161,10 +179,10 @@
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Cutoo/3110d09af8316aa83e2023d7212668f8(3).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Cutoo/3110d09af8316aa83e2023d7212668f8(3).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Cutoo/images (2).jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Cutoo/images (2).jpg' %}" alt="Colorlib"></span>
                               </div>
                               <h2>Cuto</h2>
                           </div>
@@ -172,10 +190,10 @@
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Coby/Coby_2(2).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Coby/Coby_2(2).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Coby/Coby_3.jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Coby/Coby_3.jpg' %}" alt="Colorlib"></span>
                               </div>
                               <h2>Coby The Cat</h2>
                           </div>
@@ -183,10 +201,10 @@
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Gerb/german-shepherd-husky-mix-dog(3).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Gerb/german-shepherd-husky-mix-dog(3).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Gerb/Husky-German-Shepherd-Mix(3).jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Gerb/Husky-German-Shepherd-Mix(3).jpg' %}" alt="Colorlib"></span>
                               </div>
                               <h2>Gerb</h2>
                           </div>
@@ -194,40 +212,40 @@
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/ginget the giant/unnamed(2).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/ginget the giant/unnamed(2).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/ginget the giant/D63sTeaXkAEIqsX(2).jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/ginget the giant/D63sTeaXkAEIqsX(2).jpg' %}" alt="Colorlib"></span>
                               </div><h2>Ginger the Giant</h2>
                           </div>
                         </a>
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Venus/Venus_2(2).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Venus/Venus_2(2).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Venus/Venus_3.jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Venus/Venus_3.jpg' %}" alt="Colorlib"></span>
                               </div><h2>Venus the Two Faced Cat</h2>
                           </div>
                         </a>
                     </div>
                     <div class="col-md-3">
                       <a href="blog-single-Jiff.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Jiff/Jiff_3(2).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Jiff/Jiff_3(2).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Jiff/Jiff_5(2).jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Jiff/Jiff_5(2).jpg' %}" alt="Colorlib"></span>
                               </div><h2>Jiff Pom</h2>
                           </div>
                         </a>
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Coffee/Coffe_2(2).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Coffee/Coffe_2(2).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Coffee/Coffe_3(2).png" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Coffee/Coffe_3(2).png" alt="Colorlib"></span>
                               </div>
                               <h2>White Coffee the Cat</h2>
                           </div>
@@ -235,50 +253,52 @@
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Grumpy/Grumpy_2(2).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Grumpy/Grumpy_2(2).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Grumpy/Grumpy_3(2).jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Grumpy/Grumpy_3(2).jpg' %}" alt="Colorlib"></span>
                               </div><h2>Grumpy</h2>
                           </div>
                         </a>
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/kong/zb4t6ai4cwc.jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/kong/zb4t6ai4cwc.jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/kong/648aff7f6f51c9720ec479d4ddecd527e31ef6e2_0.jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/kong/648aff7f6f51c9720ec479d4ddecd527e31ef6e2_0.jpg' %}" alt="Colorlib"></span>
                               </div><h2>Kong the Savage</h2>
                           </div>
                         </a>
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/twinkle/images(2).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/twinkle/images(2).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/twinkle/Origins-husky-Husky-German-Shepherd-Mix-guide(2).jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/twinkle/Origins-husky-Husky-German-Shepherd-Mix-guide(2).jpg' %}" alt="Colorlib"></span>
                               </div><h2>Twinkle</h2>
                           </div>
                         </a>
                     </div>
                     <div class="col-md-3">
                       <a href="#" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                          <img src="../static/pet_images/Smoothie/Smoothie_2(2).jpg" alt="Image placeholder">
+                          <img src="{% static 'pet_images/Smoothie/Smoothie_2(2).jpg' %}" alt="Image placeholder">
                           <div class="blog-content-body">
                               <div class="post-meta">
-                                <span class="author mr-2"><img src="../static/pet_images/Smoothie/Smoothie_3(2).jpg" alt="Colorlib"></span>
+                                <span class="author mr-2"><img src="{% static 'pet_images/Smoothie/Smoothie_3(2).jpg' %}" alt="Colorlib"></span>
                               </div><h2>Smoothie</h2>
                           </div>
                         </a>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
+
             </div>
           </section>
     </div>
+    {% endif %}
 
     <!-- loader -->
     <div id="loader" class="show fullscreen">
@@ -288,15 +308,15 @@
         </svg>
     </div>
 
-    <script src="../static/js/jquery-3.2.1.min.js"></script>
-    <script src="../static/js/jquery-migrate-3.0.0.js"></script>
-    <script src="../static/js/popper.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/owl.carousel.min.js"></script>
-    <script src="../static/js/jquery.waypoints.min.js"></script>
-    <script src="../static/js/jquery.stellar.min.js"></script>
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
 
 
-    <script src="../static/js/main.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>
