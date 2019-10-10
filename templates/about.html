@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -57,7 +58,7 @@
             <div class="row">
               <div class="col-md-12">
                 <h2 class="mb-4">Hi There!</h2>
-                <p class="mb-5"><img src="../static/images/Lovely-babies-babies-pets-and-animals-16771666-1024-768.jpg" alt="Image placeholder" class="img-fluid"></p>
+                <p class="mb-5"><img src="{% static 'images/Lovely-babies-babies-pets-and-animals-16771666-1024-768.jpg" alt="Image placeholder" class="img-fluid"></p>
                 <h3>About Us</h3>
           <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India. Organizations maintain their own home pages and available-pet databases</p>
               </div>
@@ -66,7 +67,7 @@
         </div>
       </div>
     </section>
-  
+
     <footer class="site-footer">
         <div class="container">
             <div class="row mb-5">
@@ -100,7 +101,7 @@
     </footer>
     <!-- END footer -->
   </div>
-    
+
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
         <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
@@ -116,5 +117,8 @@
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
     <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script></body>
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
 </html>

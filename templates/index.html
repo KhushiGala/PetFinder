@@ -1,15 +1,15 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
     <title>Paw</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -64,10 +64,10 @@
                   <div class="col-md-8">
                     <div class="post-entry-horzontal">
                       <a href="blog-single.html">
-                        <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url(../static/images/img_10.jpg);"></div>
+                        <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url({% static 'images/img_10.jpg);"></div>
                         <span class="text">
                           <div class="post-meta">
-                            <span class="author mr-2"><img src="../static/images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
+                            <span class="author mr-2"><img src="{% static 'images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
                             <span class="mr-2">March 15, 2018 </span> &bullet
                             <span class="mr-2">Food</span> &bullet
                             <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
@@ -84,7 +84,7 @@
           </section>
 
    	</div>
-    
+
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
         <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
@@ -98,5 +98,8 @@
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
     <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script></body>
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
 </html>

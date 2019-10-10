@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+import os
 
 class MyUser(AbstractUser):
     username = models.CharField(primary_key=True, max_length=128)
@@ -8,6 +9,7 @@ class MyUser(AbstractUser):
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     password = models.CharField(max_length=128)
+    
     def __str__(self):
         return self.fname + " " + self.lname
 # class MyUser(AbstractUser):
@@ -49,7 +51,7 @@ class Pet(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     animal_type = models.CharField(max_length=1, choices=pet_choices)
     up_for_adoption = models.CharField(max_length=1, choices=adoption_choices, default='N')
-    pet_profile_image = models.ImageField(blank=True, upload_to = settings.MEDIA_ROOT)
+    pet_profile_image = models.ImageField(upload_to = os.path.join(settings.MEDIA_ROOT,'pet_profile_image'))
     description = models.TextField(max_length=128)
 
     def __str__(self):
