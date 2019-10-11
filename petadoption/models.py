@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+import os
 
 class MyUser(AbstractUser):
     username = models.CharField(primary_key=True, max_length=128)
@@ -8,35 +9,23 @@ class MyUser(AbstractUser):
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     password = models.CharField(max_length=128)
+
     def __str__(self):
         return self.fname + " " + self.lname
-# class MyUser(AbstractUser):
-#     username = models.CharField(primary_key=True, max_length=128)
-#     email = models.EmailField(max_length=128, null=False, blank=False)
-#     first_name = models.CharField(max_length=128, null=False, blank=False, default='fname')
-#     last_name = models.CharField(max_length=128, null=False, blank=False, default='lname')
-#     password = models.CharField(max_length=128, default='pass')
-#     def __str__(self):
-#         return self.fname + " " + self.lname
-
-
-# class User(models.Model):
-#     name = models.CharField(max_length=128, null=False, blank=False)
-#     phone_no = models.CharField(max_length=10, null=False, blank=False)
-#     email = models.EmailField(max_length=128, primary_key=True)
-#     profile_image = models.ImageField(null=False)
-#     password = models.CharField(max_length=20, null=False, blank=False)
-
-#     def __str__(self):
-#         return self.name
 
 
 class Pet(models.Model):
-    female = 'F'
+    dog = 'D'
+    cat = 'C'
+    pet_choices = [
+        (dog, 'Dog'),
+        (cat, 'Cat'),
+    ]
     male = 'M'
+    female = 'F'
     gender_choices = [
-        (female, 'Female'),
         (male, 'Male'),
+        (female, 'Female'),
     ]
     yes = 'Y'
     no = 'N'
@@ -48,8 +37,9 @@ class Pet(models.Model):
     pet_name = models.CharField(max_length=128, null=False, blank=False, default='Pets name')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     animal_type = models.CharField(max_length=1, choices=pet_choices)
+    up_for_adoption = models.CharField(max_length=1, choices=adoption_choices, default='N')
     gender = models.CharField(max_length=1, choices=gender_choices, default='M')
-    pet_profile_image = models.ImageField(blank=True, upload_to = settings.MEDIA_ROOT)
+    pet_profile_image = models.ImageField(upload_to = os.path.join(settings.MEDIA_ROOT,'pet_profile_image'))
     description = models.TextField(max_length=128)
 
     def __str__(self):
@@ -79,7 +69,8 @@ class Adoption_requests(models.Model):
     request_no = models.CharField(max_length=128, primary_key=True)
     requester_name = models.CharField(max_length=128, null=False, blank=False, default='Your name')
     requester_phone_no = models.CharField(max_length=10, null=False, blank=False, default='Yor phone no')
-    requester_email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    requester_username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    requester_email = models.EmailField(max_length=128)
     request_description = models.TextField(max_length=500)
 
     def __str__(self):
