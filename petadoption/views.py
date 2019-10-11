@@ -53,7 +53,7 @@ def explore(request):
 
 @login_required
 def adoption_explore(request):
-    pet_list = Pet.objects.filter(up_for_adoption='Y').order_by('?')[:16]
+    pet_list = Pet.objects.filter(Up_for_Adoption='Y').order_by('?')[:16]
     return render(request, 'adoption_explore.html', context={'pet_list':pet_list})
 
 
