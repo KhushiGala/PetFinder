@@ -12,6 +12,25 @@ class MyUser(AbstractUser):
 
     def __str__(self):
         return self.fname + " " + self.lname
+# class MyUser(AbstractUser):
+#     username = models.CharField(primary_key=True, max_length=128)
+#     email = models.EmailField(max_length=128, null=False, blank=False)
+#     first_name = models.CharField(max_length=128, null=False, blank=False, default='fname')
+#     last_name = models.CharField(max_length=128, null=False, blank=False, default='lname')
+#     password = models.CharField(max_length=128, default='pass')
+#     def __str__(self):
+#         return self.fname + " " + self.lname
+
+
+# class User(models.Model):
+#     name = models.CharField(max_length=128, null=False, blank=False)
+#     phone_no = models.CharField(max_length=10, null=False, blank=False)
+#     email = models.EmailField(max_length=128, primary_key=True)
+#     profile_image = models.ImageField(null=False)
+#     password = models.CharField(max_length=20, null=False, blank=False)
+
+#     def __str__(self):
+#         return self.name
 
 
 class Pet(models.Model):
@@ -55,14 +74,23 @@ class Pet_Photos(models.Model):
         return self.photo_id
 
 
-class Comments(models.Model):
-    picture_id = models.ForeignKey('Pet_Photos', on_delete=models.CASCADE)
-    comment_no = models.CharField(max_length=128, primary_key=True)
-    comment_writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=128, null=False, blank=False, default='Comment')
+# class Comments(models.Model):
+#     picture_id = models.ForeignKey('Pet_Photos', on_delete=models.CASCADE)
+#     comment_no = models.CharField(max_length=128, primary_key=True)
+#     comment_writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     comment = models.CharField(max_length=128, null=False, blank=False, default='Comment')
+#
+#     def __str__(self):
+#         return self.comment_no
+
+
+class Contact_us(models.Model):
+    message_no = models.CharField(max_length=128, primary_key=True)
+    message_writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    message = models.CharField(max_length=128, null=False, blank=False, default='message')
 
     def __str__(self):
-        return self.comment_no
+        return self.message_no
 
 
 class Adoption_requests(models.Model):

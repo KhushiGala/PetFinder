@@ -16,11 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include,re_path
 from petadoption import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
     #path('login/', views.login_user),
     #path('register/', views.user_register),
-    path('', views.home_page),
-    path('register/', views.user_register),
+    path('', views.user_login, name='user_login'),
+    path('sign_up/', views.user_register, name='user_register'),
+    path('explore/', views.explore, name='explore'),
+    path('pet/', include('petadoption.urls')),
+    #path('pet/register/', views.pet_register, name='pet_register'),
+    path('logout/', views.user_logout, name='user_logout'),
+    path('admin/', admin.site.urls)
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

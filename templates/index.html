@@ -5,7 +5,7 @@
     <title>Paw</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
@@ -23,7 +23,7 @@
                 <div class="row pt-5">
                     <div class="col-12 text-center">
                       <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                      <h1 class="site-logo"><a href="index.html">Paw</a></h1>
+                      <h1 class="site-logo"><a href="{% url 'index' %}">Paw</a></h1>
                   </div>
                 </div>
               </div>
@@ -31,20 +31,26 @@
           <nav class="navbar navbar-expand-md  navbar-light bg-light">
                 <div class="container">
                   <div class="collapse navbar-collapse" id="navbarMenu">
-                      <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                              <a class="nav-link" href="explore.html">Explore</a>
-                        </li>
+                    <ul class="navbar-nav mx-auto">
                       <li class="nav-item">
-                              <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link active" href="index.html">Account</a>
-                        </li>
-                      </ul>
+                            <a class="nav-link" href="{% url 'explore' %}">Explore</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'adoption_explore' %}">Adopt</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'pet_register' %}">Add Pet</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'index' %}">Account</a>
+                      </li>
+                    </ul>
                     </div>
                 </div>
             </nav>
