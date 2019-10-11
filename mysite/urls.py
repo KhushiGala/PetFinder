@@ -27,6 +27,7 @@ urlpatterns = [
     path('sign_up/', views.user_register, name='user_register'),
     path('explore/', views.explore, name='explore'),
     path('pet/', include('petadoption.urls')),
+    #path('myaccount/', views.my_account, name='my_account'),
     #path('pet/register/', views.pet_register, name='pet_register'),
     path('logout/', views.user_logout, name='user_logout'),
     path('admin/', admin.site.urls)

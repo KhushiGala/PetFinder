@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    </head>
+  </head>
     <body>
       <div class="wrap">
         <header role="banner">
@@ -22,7 +22,7 @@
                 <div class="row pt-5">
                     <div class="col-12 text-center">
                       <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                      <h1 class="site-logo"><a href="{% url 'SignUp' %}">Paw</a></h1>
+                      <h1 class="site-logo"><a href="login.html">Paw</a></h1>
                   </div>
                 </div>
               </div>
@@ -52,42 +52,46 @@
           <div class="container">
               <div class="col-md-12 text-center">
                 <h1>Sign Up</h1>
-                </div>
+              </div>
             <div class="row blog-entries">
-              <div class="col-md-4"></div>
-              <div class="col-md-8">
                 <form action="#" method="POST" class="form-group">
-                  <table cellpadding="10" >
+                  <div class="col-md-4"></div>
+                  <div class="col-md-8">
+                  <table>
                   {% csrf_token %}
                   {{ form }}
                 </table>
-                </div>
+              </div>
+                  <div class="row">
                     <div class="col-md-6 text-center">
                       <input type="submit" value="Sign Up" class="btn btn-primary">
                     </div>
                     <div class="col-md-6 text-center">
                       <input type="button" value="Already Have an Account?" class="btn btn-primary" onclick="location.href='{% url 'user_login' %}'">
-                    </div>
-                    </div>
-                  </div>
-                </form>
+                    </div></div>
+
+                </form></div>
+              </div>
+              <div class="col-md-3"></div>
+            </div>
+            <!-- END main-content -->
+          </div>
         </section>
         <footer class="site-footer">
             <div class="container">
-                <div class="row mb-5">
+                <div class="row mb-2">
                   <div class="col-md-4">
                       <h3>About Us</h3>
-              <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India. Organizations maintain their own home pages and available-pet databases</p>
+              <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India.</p>
                   </div>
-                    <div class="col-md-5">
-                    </div>
-                    <div class="col-md-3">
+
+                    <div class="col-md-5"></div>
+              <div class="col-md-2">
                           <h3>Social</h3>
                           <ul class="list-unstyled footer-social">
                               <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
                               <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
                               <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
-                              <li><a href="#"><span class="fa fa-youtube-play"></span> Youtube</a></li>
                               <li><a href="#"><span class="fa fa-snapchat"></span> Snapchat</a></li>
                           </ul>
                       </div>
@@ -95,14 +99,14 @@
                 </div>
             </div>
         </footer>
-  </div>
+    </div>
+
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
         <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
         <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/>
         </svg>
     </div>
-     </div>
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
@@ -110,5 +114,6 @@
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
     <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script></body>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
 </html>

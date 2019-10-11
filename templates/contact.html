@@ -2,18 +2,17 @@
 <!doctype html>
 <html lang="en">
     <head>
-    <title>Paw</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
+      <title>Paw</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">\
-    </head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"></head>
     <body>
       <div class="wrap">
         <header role="banner">
@@ -22,8 +21,8 @@
                 <div class="row pt-5">
                     <div class="col-12 text-center">
                       <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                      <h1 class="site-logo"><a href="{% url 'adoption' %}">Paw</a></h1>
-                    </div>
+                      <h1 class="site-logo"><a href="contact.html">Paw</a></h1>
+                  </div>
                 </div>
               </div>
           </div>
@@ -32,22 +31,16 @@
                   <div class="collapse navbar-collapse" id="navbarMenu">
                       <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                              <a class="nav-link" href="{% url 'explore' %}">Explore</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="{% url 'adoption_explore' %}">Adopt</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="{% url 'pet_register' %}">Add Pet</a>
+                              <a class="nav-link" href="explore.html">Explore</a>
                         </li>
                       <li class="nav-item">
-                              <a class="nav-link" href="{% url 'about' %}">About</a>
+                              <a class="nav-link" href="about.html">About</a>
                         </li>
                         <li class="nav-item">
-                              <a class="nav-link active" href="{% url 'Contact' %}">Contact</a>
+                              <a class="nav-link active" href="contact.html">Contact</a>
                         </li>
                         <li class="nav-item">
-                              <a class="nav-link" href="{% url 'index' %}">Account</a>
+                              <a class="nav-link" href="index.html">Account</a>
                         </li>
                       </ul>
                     </div>
@@ -64,6 +57,38 @@
               <div class="col-md-12 text-center">
                 <form action="#" method="post" class="form-group">
                   <div class="row">
+                    <div class="col-md-3 form-group">
+                      <label for="name">Name:</label>
+                    </div>
+                    <div class="col-md-9 form-group">
+                      <input type="text" id="name" class="form-control ">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 form-group">
+                      <label for="Phone">Phone No:</label>
+                    </div>
+                    <div class="col-md-9 form-group">
+                      <input type="tel" id="phone" class="form-control ">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 form-group">
+                      <label for="email">Email:</label>
+                    </div>
+                    <div class="col-md-9 form-group">
+                      <input type="email" id="email" class="form-control ">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 form-group">
+                      <label for="message">Write Message</label>
+                    </div>
+                    <div class="col-md-9 form-group">
+                      <textarea name="message" id="message" class="form-control " cols="30" rows="8"></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
                   <div class="col-md-12 text-center">
                       <input type="submit" value="Send Message" class="btn btn-primary">
                     </div>
@@ -75,27 +100,29 @@
           </div>
         </section>
 
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row mb-5">
-              <div class="col-md-4">
-              <h3>About Us</h3>
-              <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India. Organizations maintain their own home pages and available-pet databases</p>
-              </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-3">
-                      <h3>Social</h3>
-                      <ul class="list-unstyled footer-social">
-                          <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                          <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
-                          <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
-                          <li><a href="#"><span class="fa fa-youtube-play"></span> Youtube</a></li>
-                          <li><a href="#"><span class="fa fa-snapchat"></span> Snapchat</a></li>
-                      </ul>
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row mb-2">
+                  <div class="col-md-4">
+                      <h3>About Us</h3>
+              <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India.</p>
                   </div>
+
+                    <div class="col-md-5"></div>
+              <div class="col-md-2">
+                          <h3>Social</h3>
+                          <ul class="list-unstyled footer-social">
+                              <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
+                              <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
+                              <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
+                              <li><a href="#"><span class="fa fa-snapchat"></span> Snapchat</a></li>
+                          </ul>
+                      </div>
+                    </div>
                 </div>
-        </div>
-    </footer>
+            </div>
+        </footer>
+    <!-- END footer -->
 
     </div>
 
@@ -110,5 +137,8 @@
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
     <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>  </body>
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
 </html>

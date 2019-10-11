@@ -7,8 +7,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import MyUser, Pet
 
+
+
+def my_account(request):
+    pass
+
 def pet_adoption_request(request, pet_id):
     pass
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -32,6 +38,7 @@ def user_login(request):
             #return HttpResponse("Invalid Details")
     return render(request, 'login.html')
 
+
 @login_required
 def pet_info(request, pet_id):
     mypet = Pet.objects.get(id=pet_id)
@@ -42,6 +49,13 @@ def explore(request):
     pet_list = Pet.objects.order_by('?')[:16]
     #pet_list = Pet.objects.filter(up_for_adoption='Y').order_by('?')[:16]
     return render(request, 'explore.html', context={'pet_list':pet_list})
+
+
+@login_required
+def adoption_explore(request):
+    pet_list = Pet.objects.filter(up_for_adoption='Y').order_by('?')[:16]
+    return render(request, 'adoption_explore.html', context={'pet_list':pet_list})
+
 
 @login_required
 def user_logout(request):
@@ -67,7 +81,7 @@ def pet_register(request):
 
     else:
         pet_form = PetRegisterForm()
-    return render(request, 'petregister.html',{'form':pet_form})
+        return render(request, 'petregister.html',{'form':pet_form})
 
 
 def user_register(request):

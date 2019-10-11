@@ -22,7 +22,7 @@
                 <div class="row pt-5">
                     <div class="col-12 text-center">
                       <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                      <h1 class="site-logo"><a href="{% url 'login' %}">Paw</a></h1>
+                      <h1 class="site-logo"><a href="login.html">Paw</a></h1>
                   </div>
                 </div>
               </div>
@@ -46,11 +46,12 @@
                 <h1>Login</h1>
               </div>
             <div class="row blog-entries">
+
               <div class="col-md-12">
-                <form method="POST">
+                <form method="POST" class="form-group">
                   {% csrf_token %}
                   <div class="row">
-                    <div class="col-md-4 form-group"></div>
+                      <div class="col-md-4"></div>
                     <div class="col-md-1 form-group">
                       <label for="email">Username:</label>
                     </div>
@@ -59,7 +60,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-4 form-group"></div>
+                      <div class="col-md-4"></div>
                     <div class="col-md-1 form-group">
                       <label for="password">Password:</label>
                     </div>
@@ -67,7 +68,6 @@
                       <input type="password" id="password" class="form-control" required name="password">
                     </div>
                   </div>
-                    <div class="row"></div>
                   <div class="row">
                     <div class="col-md-6 text-center">
                       <input type="submit" value="Sign In" class="btn btn-primary" >
@@ -78,35 +78,34 @@
                   </div>
                 </form>
               </div>
+              <div class="col-md-1"></div>
             </div>
             <!-- END main-content -->
           </div>
         </section>
         <footer class="site-footer">
-        <div class="container">
-            <div class="row mb-5">
-              <div class="col-md-4">
-                  <h3>About Us</h3>
-          <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India. Organizations maintain their own home pages and available-pet databases</p>
-              </div>
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-3">
-                      <h3>Social</h3>
-                      <ul class="list-unstyled footer-social">
-                          <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                          <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
-                          <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
-                          <li><a href="#"><span class="fa fa-youtube-play"></span> Youtube</a></li>
-                          <li><a href="#"><span class="fa fa-snapchat"></span> Snapchat</a></li>
-                      </ul>
+            <div class="container">
+                <div class="row mb-2">
+                  <div class="col-md-4">
+                      <h3>About Us</h3>
+              <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India.</p>
                   </div>
+
+                    <div class="col-md-5"></div>
+              <div class="col-md-2">
+                          <h3>Social</h3>
+                          <ul class="list-unstyled footer-social">
+                              <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
+                              <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
+                              <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
+                              <li><a href="#"><span class="fa fa-snapchat"></span> Snapchat</a></li>
+                          </ul>
+                      </div>
+                    </div>
                 </div>
             </div>
-    </footer>
-
-
-        </div>
+        </footer>
+    </div>
 
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
