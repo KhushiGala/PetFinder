@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.admin import widgets
-from .models import MyUser, Pet
+from .models import MyUser, Pet, Comments
 
 # class UserRegisterForm(forms.ModelForm):
 #     first_name=forms.CharField(widget=forms.TextInput(attrs={'class':"input--style", 'type':"text", 'placeholder':"First Name", 'name':"first_name"}))
@@ -22,6 +22,10 @@ class PetRegisterForm(forms.ModelForm):
         model = Pet
         exclude = ('owner', 'created')
 
+class CommentForm(forms.ModelForm):
+    class Meta():
+        model = Comments
+        fields = ['comment']
 
 # class UserLoginForm(forms.ModelForm):
 #     #username = forms.CharField(widget=forms.TextInput(attrs={'class':"input--style-3", 'type':"text" , 'placeholder':"Username",'name':"username"}))
