@@ -58,6 +58,11 @@ def adoption_explore(request):
     return render(request, 'adoption_explore.html', context={'pet_list':pet_list})
 
 
+# @login_required
+# def about(request):
+#     return render(request, 'about.html')
+
+
 @login_required
 def user_logout(request):
     logout(request)
@@ -82,7 +87,7 @@ def pet_register(request):
 
     else:
         pet_form = PetRegisterForm()
-        return render(request, 'petregister.html',{'form':pet_form})
+    return render(request, 'petregister.html',{'form':pet_form})
 
 
 def user_register(request):
