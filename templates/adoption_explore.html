@@ -76,7 +76,7 @@
                 <div class="row">
             {% for pet in pet_list %}
             <div class="col-md-3">
-              <a href="blog-single-Nala.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
+              <a href="{% url 'pet_info' pet_id=pet.id %}" class="blog-entry element-animate" data-animate-effect="fadeIn">
                   <img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="Image placeholder">
                   <div class="blog-content-body">
                       <div class="post-meta">

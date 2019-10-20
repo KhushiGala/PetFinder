@@ -38,6 +38,11 @@ def user_login(request):
             #return HttpResponse("Invalid Details")
     return render(request, 'login.html')
 
+@login_required
+def index(request):
+    pet_list = Pet.objects.order_by('?')[:16]
+    return render(request, 'index.html', context={'pet_list':pet_list})
+
 
 @login_required
 def pet_info(request, pet_id):

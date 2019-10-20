@@ -11,7 +11,8 @@ class MyUser(AbstractUser):
     password = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.fname + " " + self.lname
+    #    return self.fname + " " + self.lname
+        return self.username
 # class MyUser(AbstractUser):
 #     username = models.CharField(primary_key=True, max_length=128)
 #     email = models.EmailField(max_length=128, null=False, blank=False)
