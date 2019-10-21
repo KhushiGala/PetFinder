@@ -54,28 +54,24 @@
                 <h1>Sign Up</h1>
               </div>
             <div class="row blog-entries">
-                <form action="#" method="POST" class="form-group">
-                  <div class="col-md-4"></div>
-                  <div class="col-md-8">
-                  <table>
-                  {% csrf_token %}
-                  {{ form }}
-                </table>
-              </div>
-                  <div class="row">
-                    <div class="col-md-6 text-center">
-                      <input type="submit" value="Sign Up" class="btn btn-primary">
-                    </div>
-                    <div class="col-md-6 text-center">
-                      <input type="button" value="Already Have an Account?" class="btn btn-primary" onclick="location.href='{% url 'user_login' %}'">
-                    </div></div>
-
-                </form></div>
-              </div>
+                <div class="col-md-4"></div>
+           <div class="col-md-8">
+             <form action="#" method="POST" class="form-group">
+               <table cellpadding="10" >
+               {% csrf_token %}
+               {{ form }}
+             </table>
+             </div>
+                 <div class="col-md-6 text-center">
+                   <input type="submit" value="Sign Up" class="btn btn-primary">
+                 </div>
+                 <div class="col-md-6 text-center">
+                   <input type="button" value="Already Have an Account?" class="btn btn-primary" onclick="location.href='{% url 'user_login' %}'">
+                 </div>
+             </form>
+                </div>
               <div class="col-md-3"></div>
-            </div>
-            <!-- END main-content -->
-          </div>
+              </div>
         </section>
         <footer class="site-footer">
             <div class="container">
@@ -85,19 +81,18 @@
               <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India.</p>
                   </div>
 
+
                     <div class="col-md-5"></div>
               <div class="col-md-2">
                           <h3>Social</h3>
                           <ul class="list-unstyled footer-social">
-                              <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                              <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
-                              <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
-                              <li><a href="#"><span class="fa fa-snapchat"></span> Snapchat</a></li>
+                              <li><a href="https://twitter.com/petfinder?lang=en"><span class="fa fa-twitter"></span> Twitter</a></li>
+                              <li><a href="https://www.facebook.com/Petfinder/"><span class="fa fa-facebook"></span> Facebook</a></li>
+                              <li><a href="https://www.instagram.com/petfinder/?hl=en"><span class="fa fa-instagram"></span> Instagram</a></li>
                           </ul>
                       </div>
                     </div>
                 </div>
-            </div>
         </footer>
     </div>
 

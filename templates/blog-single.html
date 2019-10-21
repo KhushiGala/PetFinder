@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Colorlib Wordify &mdash; Minimal Blog Template</title>
+    <title>Paw</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,7 +29,7 @@
                 <div class="row pt-5">
                     <div class="col-12 text-center">
                       <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                      <h1 class="site-logo"><a href="index.html">Pet Finder</a></h1>
+                      <h1 class="site-logo"><a href="index.html">Paw</a></h1>
                   </div>
                 </div>
               </div>
@@ -55,14 +55,14 @@
                       </li>
                     </ul>
                   </div>
-                  <a href={%  url 'user_logout' %}>Logout</a>
+                  <a href={%  url 'user_logout'  %}>Logout</a>
               </div>
           </nav>
         </header>
         <!-- END header -->
       <!-- END header -->
 
-    <section class="site-section py-lg">
+    <section class="site-section pt-5 pb-5">
       <div class="container">
         <div class="row blog-entries element-animate">
           <div class="p-5 bg-light">
@@ -78,7 +78,12 @@
                 <p>Age:  {{pet.age}} </p>
                 <p>Breed:  {{pet.breed}} </p>
                 <p>Description: {{pet.description}}</p>
-                <p> {% if pet.owner == request.user %}Your Pet{% else %}{{  pet.owner }}{% endif %}</p>
+                {% if pet.owner == request.user %}
+                <p>Your Pet</p>
+                <p><a href={%  url 'delete_pet' pet_id=pet.id %}>Delete Pet</a></p>
+                {% else %}
+                <p>{{  pet.owner }}</p>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -135,7 +140,7 @@
               {{ adoption_form }}</table>
               <div class="row">
 
-                <div class="col-md-2"></div>
+                <div class="col-md-3"></div>
                   <input type="submit" name="adoption_form_submit" value="Send Adoption Request" class="btn btn-primary">
                 </div></div>
               </form>
@@ -145,27 +150,27 @@
     </section>
 {% endif %}
 
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row mb-2">
-              <div class="col-md-4">
-                  <h3>About Us</h3>
-          <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India.</p>
-              </div>
+<footer class="site-footer">
+    <div class="container">
+        <div class="row mb-2">
+          <div class="col-md-4">
+              <h3>About Us</h3>
+      <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India.</p>
+          </div>
 
-                <div class="col-md-5"></div>
-          <div class="col-md-2">
-                      <h3>Social</h3>
-                      <ul class="list-unstyled footer-social">
-                          <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                          <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
-                          <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
-                          <li><a href="#"><span class="fa fa-snapchat"></span> Snapchat</a></li>
-                      </ul>
-                  </div>
-                </div>
+
+            <div class="col-md-5"></div>
+      <div class="col-md-2">
+                  <h3>Social</h3>
+                  <ul class="list-unstyled footer-social">
+                      <li><a href="https://twitter.com/petfinder?lang=en"><span class="fa fa-twitter"></span> Twitter</a></li>
+                      <li><a href="https://www.facebook.com/Petfinder/"><span class="fa fa-facebook"></span> Facebook</a></li>
+                      <li><a href="https://www.instagram.com/petfinder/?hl=en"><span class="fa fa-instagram"></span> Instagram</a></li>
+                  </ul>
+              </div>
             </div>
-    </footer>
+        </div>
+</footer>
       <!-- END footer -->
 
     </div>

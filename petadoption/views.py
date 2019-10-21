@@ -54,7 +54,7 @@ def pet_info(request, pet_id):
     mypet = Pet.objects.get(id=pet_id)
     comments = Comments.objects.filter(pet_id=pet_id).order_by('created')
     comments_count = comments.count()
-    return render(request, 'blog-single.html', {'pet':mypet, 'comments_count':comments_count, 'comments':comments, 'comment_form':new_comment_form, 'adoption_form':new_adoption_form})
+    return render(request, 'blog-single.html', {'pet':mypet, 'comments_count':comments_count, 'comments':comments, 'comment_form':new_comment_form, 'adoption_form':new_adoption_form, 'delete_pet':delete_pet})
 
 @login_required
 def myaccount(request, user_username, pet_id):
@@ -69,7 +69,7 @@ def myaccount(request, user_username, pet_id):
     # for p in pet_list:
     #     instance = Adoption_requests.objects.filter(pet=p)
     #     adoption_request_list = adoption_request_list.union(instance)
-    return render(request, 'myaccount.html', context={'pet_list':pet_list , 'adoption_list':adoption_request_list, 'pet_selected':pet_selected})
+    return render(request, 'myaccount.html', context={'pet_list':pet_list , 'adoption_list':adoption_request_list, 'pet_selected':pet_selected })
 
 @login_required
 def explore(request):
@@ -142,6 +142,13 @@ def user_register(request):
 def user_logout(request):
    logout(request)
    return HttpResponseRedirect(reverse('user_login'))
+
+def delete_pet(request, pet_id):
+    query = Pet.objects.get(id=pet_id)
+    query.delete()
+    messages.success(request, 'You have Deleted successfully')
+    return HttpResponseRedirect(reverse('explore'))
+
 
 def about(request):
     return render(request, 'about.html')
