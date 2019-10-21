@@ -17,14 +17,12 @@ from django.contrib import admin
 from django.urls import path,include,re_path
 from petadoption import views
 from django.conf import settings
-from django.conf.urls import url
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.user_login, name='user_login'),
     path('sign_up/', views.user_register, name='user_register'),
     path('explore/', views.explore, name='explore'),
-    path('explore/index.html', views.index, name='index'),
     path('pet/', include('petadoption.urls')),
     #path('myaccount/', views.my_account, name='my_account'),
     path('logout/', views.user_logout, name='user_logout'),

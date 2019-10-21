@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import UserRegisterForm, PetRegisterForm,  CommentForm
+from .forms import UserRegisterForm, PetRegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -38,34 +38,12 @@ def user_login(request):
             #return HttpResponse("Invalid Details")
     return render(request, 'login.html')
 
-@login_required
-def index(request):
-    pet_list = Pet.objects.filter(owner=request.user).order_by('?')[:16]
-    return render(request, 'index.html', context={'pet_list':pet_list})
-
-
-# @login_required
-# def pet_info(request, pet_id):
-#     mypet = Pet.objects.get(id=pet_id)
-#     comments_count = Comments.objects.filter(pet_id=pet_id).count()
-#     return render(request, 'blog-single.html', {'pet':mypet, 'comments_count':comments_count})
-
 
 @login_required
 def pet_info(request, pet_id):
-    if request.method == 'POST':
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid:
-            mycomment = comment_form.save(commit=False)
-            mycomment.comment_writer = request.user
-            mycomment.pet_id = Pet.objects.filter(id=pet_id)[0]
-            mycomment.save()
-    new_comment_form = CommentForm()
     mypet = Pet.objects.get(id=pet_id)
-    comments = Comments.objects.filter(pet_id=pet_id).order_by('created')
-    comments_count = comments.count()
-    return render(request, 'blog-single.html', {'pet':mypet, 'comments_count':comments_count, 'comments':comments, 'comment_form':new_comment_form})
-
+    comments_count = Comments.objects.filter(pet_id=pet_id).count()
+    return render(request, 'blog-single.html', {'pet':mypet, 'comments_count':comments_count})
 
 @login_required
 def explore(request):
@@ -78,11 +56,6 @@ def explore(request):
 def adoption_explore(request):
     pet_list = Pet.objects.filter(up_for_adoption='Y').order_by('?')[:16]
     return render(request, 'adoption_explore.html', context={'pet_list':pet_list})
-
-
-# @login_required
-# def about(request):
-#     return render(request, 'about.html')
 
 
 @login_required
@@ -109,7 +82,7 @@ def pet_register(request):
 
     else:
         pet_form = PetRegisterForm()
-    return render(request, 'petregister.html',{'form':pet_form})
+        return render(request, 'petregister.html',{'form':pet_form})
 
 
 def user_register(request):
