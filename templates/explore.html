@@ -37,7 +37,7 @@
                  {% endfor %}
 
            {% endif %}
-          <nav class="navbar navbar-expand-md  navbar-light bg-light">
+          <!-- <nav class="navbar navbar-expand-md  navbar-light bg-light">
                 <div class="container">
                   <div class="collapse navbar-collapse" id="navbarMenu">
                       <ul class="navbar-nav mx-auto">
@@ -58,6 +58,30 @@
                         </li>
                       </ul>
                     </div>
+                </div>
+            </nav> -->
+            <nav class="navbar navbar-expand-md  navbar-light bg-light">
+                <div class="container">
+                  <div class="collapse navbar-collapse" id="navbarMenu">
+                      <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                              <a class="nav-link active" href="#">Explore</a>
+                        </li>
+                      <li class="nav-item">
+                              <a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link" href="{% url 'pet_register' %}">Add Pet</a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link" href="{% url 'adoption_explore' %}">Adopt</a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link" href="{% url 'myaccount' user_username=request.user.username pet_id='0' %}">Account</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <a href={%  url 'user_logout' %}>Logout</a>
                 </div>
             </nav>
         </header>
@@ -83,14 +107,14 @@
                           </div>
                         </a>
                     </div>
-                    <div>
+                    <!-- <div>
                       <a href={% url 'adoption_explore' %} class="a-block d-flex align-items-center height-lg" style="background-image: url('{% static 'images/LOVELY_pets_1.jpg' %}'); ">
                           <div class="text half-to-full">
                               <h3>How to Find the The Perfect Pet</h3>
                               <p>We give the choices You end up choosing </p>
                           </div>
                         </a>
-                    </div>
+                    </div> -->
                     <div>
                         <a href={% url 'adoption_explore' %} class="a-block d-flex align-items-center height-lg" style="background-image: url('{% static 'images/untitled.png' %}'); ">
                           <div class="text half-to-full">
@@ -117,7 +141,7 @@
                 <div class="row">
             {% for pet in pet_list %}
             <div class="col-md-3">
-              <a href="blog-single-Nala.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
+              <a href={% url 'pet_info' pet_id=pet.id %} class="blog-entry element-animate" data-animate-effect="fadeIn">
                   <img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="Image placeholder">
                   <div class="blog-content-body">
                       <div class="post-meta">
@@ -131,6 +155,7 @@
 
             </div>
           </section>
+     {% endif %}
           <footer class="site-footer">
               <div class="container">
                   <div class="row mb-2">
@@ -154,7 +179,7 @@
               </div>
           </footer>
     </div>
-    {% endif %}
+
 
     <!-- loader -->
     <div id="loader" class="show fullscreen">

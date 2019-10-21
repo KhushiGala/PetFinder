@@ -5,7 +5,7 @@
     <title>Paw</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
+    	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
@@ -28,59 +28,94 @@
               </div>
           </div>
           <nav class="navbar navbar-expand-md  navbar-light bg-light">
-                <div class="container">
-                  <div class="collapse navbar-collapse" id="navbarMenu">
-                      <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                              <a class="nav-link" href="explore.html">Explore</a>
-                        </li>
+              <div class="container">
+                <div class="collapse navbar-collapse" id="navbarMenu">
+                    <ul class="navbar-nav mx-auto">
                       <li class="nav-item">
-                              <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link active" href="index.html">Account</a>
-                        </li>
-                      </ul>
-                    </div>
-                </div>
-            </nav>
+                            <a class="nav-link active" href="{% url 'explore' %}">Explore</a>
+                      </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'pet_register' %}">Add Pet</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'adoption_explore' %}">Adopt</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link active" href="#">Account</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <a href={%  url 'user_logout' %}>Logout</a>
+              </div>
+          </nav>
         </header>
       <!-- END header -->
 
 	<section class="site-section pt-5">
           <div class="container">
-            <div class="row mb-4">
-              <div class="col-md-12 text-center">
-                <h2 class="mb-4">My Pets Pets</h2>
-              </div>
-            </div>
 			<div class="row blog-entries">
-              <div class="col-md-12 text-center">
-                <div class="row mb-5 mt-5">
-                  <div class="col-md-2"></div>
-                  <div class="col-md-8">
-                    <div class="post-entry-horzontal">
-                      <a href="blog-single.html">
-                        <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url({% static 'images/img_10.jpg);"></div>
-                        <span class="text">
-                          <div class="post-meta">
-                            <span class="author mr-2"><img src="{% static 'images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                            <span class="mr-2">March 15, 2018 </span> &bullet
-                            <span class="mr-2">Food</span> &bullet
-                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                          </div>
-                          <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                        </span>
-                      </a>
-                    </div>
+              <div class="col-md-5 text-center">
+                <div class="row mb-4">
+                  <div class="col-md-12 text-center">
+                    <h2 class="mb-4">My Pets</h2>
                   </div>
                 </div>
+                {% for pet in pet_list %}
+                  <a href="{% url 'myaccount' user_username=request.user.username pet_id=pet.id %}" class="blog-entry element-animate" data-animate-effect="fadeIn">
+                      <img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="Image placeholder">
+                      <div class="blog-content-body">
+                          <div class="post-meta">
+                            <!-- <span class="author mr-2"><img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="Colorlib"></span> -->
+                          </div>
+                          <h2>{{ pet.pet_name }}</h2>
+                          <a href="{% url 'pet_info' pet_id=pet.id %}">Click to view Details</a>
+                      </div>
+                    </a>
+                {% endfor %}
+                </div>
+                  <div class="col-md-2"></div>
+              <div class="col-md-5 text-center">
+                <div class="row mb-4">
+                  <div class="col-md-12 text-center">
+                    <h2 class="mb-4">Adoption Requests</h2>
+                  </div>
+                </div>
+      {% if pet_selected %}
+
+                {% if adoption_list %}
+
+                <div class="row mb-5 mt-5">
+                    {% for adoption in adoption_list %}
+                    <div class="post-entry-horzontal">
+                                      <!-- <a href="blog-single.html"> -->
+                                        <span class="text">
+                                          <div class="post-meta">
+                                            <span class="author mr-2">{{adoption.requester}}</span>
+                                            <span class="mr-2">{{adoption.created}}</span>
+                                            <span class="ml-2">{{adoption.phone_no}}</span>
+                                          </div>
+                                          <h4>{{adoption.description_message}}</h4>
+                                        </span>
+                                      <!-- </a> -->
+                                    </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% else %}
+                    <h4 class="mb-4">No Requests for Current Pet</h4>
+                {% endif %}
+
+
+      {% else %}
+                  <h4 class="mb-4">Select a pet to See Requests Here</h4>
+                <!-- <h2 class="mb-4">No adoption requests</h2> -->
               </div>
             </div>
-          </div>
+      {% endif %}
+
           </section>
           <footer class="site-footer">
               <div class="container">

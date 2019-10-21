@@ -35,64 +35,115 @@
               </div>
           </div>
           <nav class="navbar navbar-expand-md  navbar-light bg-light">
-                <div class="container">
-                  <div class="collapse navbar-collapse" id="navbarMenu">
-                      <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                              <a class="nav-link" href="index.html">Home</a>
-                        </li>
+              <div class="container">
+                <div class="collapse navbar-collapse" id="navbarMenu">
+                    <ul class="navbar-nav mx-auto">
                       <li class="nav-item">
-                              <a class="nav-link" href="explore.html">Explore</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
-                      </ul>
-                    </div>
-                </div>
-            </nav>
+                            <a class="nav-link" href="{% url 'explore' %}">Explore</a>
+                      </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'pet_register' %}">Add Pet</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'adoption_explore' %}">Adopt</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'myaccount' user_username=request.user.username pet_id='0' %}">Account</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <a href={%  url 'user_logout' %}>Logout</a>
+              </div>
+          </nav>
         </header>
         <!-- END header -->
       <!-- END header -->
 
     <section class="site-section py-lg">
       <div class="container">
-
         <div class="row blog-entries element-animate">
-
-          <div class="col-md-12 text-center">
-            <img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="{{pet.pet_name}}'s Profile Picture" class="img-fluid mb-5">
-             <div class="post-meta">
-                        <!-- <span class="author mr-2"><img src="" alt="{{pet.pet_name}}'s Profile Picture" class="mr-2"> Colorlib</span>&bullet; -->
-                        <span class="mr-2">{{pet.created}}</span> &bullet;
-                        <span class="ml-2"><span class="fa fa-comments"></span>{{comments_count}}</span>
-                      </div>
-            <h1 class="mb-4">{{pet.pet_name}}</h1>
-            <a class="category mb-5" href="#">{% if pet.animal_type == 'D' %}Dog{% elif pet.animal.type == 'C' %}Cat{% endif %}</a>
-
-            <div class="post-content-body">
-              {{pet.description}}
-              <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium nam quas inventore, ut iure iste modi eos adipisci ad ea itaque labore earum autem nobis et numquam, minima eius. Nam eius, non unde ut aut sunt eveniet rerum repellendus porro.</p>
-            <p>Sint ab voluptates itaque, ipsum porro qui obcaecati cumque quas sit vel. Voluptatum provident id quis quo. Eveniet maiores perferendis officia veniam est laborum, expedita fuga doloribus natus repellendus dolorem ab similique sint eius cupiditate necessitatibus, magni nesciunt ex eos.</p>
-            <p>Quis eius aspernatur, eaque culpa cumque reiciendis, nobis at earum assumenda similique ut? Aperiam vel aut, ex exercitationem eos consequuntur eaque culpa totam, deserunt, aspernatur quae eveniet hic provident ullam tempora error repudiandae sapiente illum rerum itaque voluptatem. Commodi, sequi.</p>
-            <p>Quibusdam autem, quas molestias recusandae aperiam molestiae modi qui ipsam vel. Placeat tenetur veritatis tempore quos impedit dicta, error autem, quae sint inventore ipsa quidem. Quo voluptate quisquam reiciendis, minus, animi minima eum officia doloremque repellat eos, odio doloribus cum.</p>
-            <p>Temporibus quo dolore veritatis doloribus delectus dolores perspiciatis recusandae ducimus, nisi quod, incidunt ut quaerat, magnam cupiditate. Aut, laboriosam magnam, nobis dolore fugiat impedit necessitatibus nisi cupiditate, quas repellat itaque molestias sit libero voluptas eveniet omnis illo ullam dolorem minima.</p>
-            <p>Porro amet accusantium libero fugit totam, deserunt ipsa, dolorem, vero expedita illo similique saepe nisi deleniti. Cumque, laboriosam, porro! Facilis voluptatem sequi nulla quidem, provident eius quos pariatur maxime sapiente illo nostrum quibusdam aliquid fugiat! Earum quod fuga id officia.</p>
-            <p>Illo magnam at dolore ad enim fugiat ut maxime facilis autem, nulla cumque quis commodi eos nisi unde soluta, ipsa eius aspernatur sint atque! Nihil, eveniet illo ea, mollitia fuga accusamus dolor dolorem perspiciatis rerum hic, consectetur error rem aspernatur!</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus magni explicabo id molestiae, minima quas assumenda consectetur, nobis neque rem, incidunt quam tempore perferendis provident obcaecati sapiente, animi vel expedita omnis quae ipsa! Obcaecati eligendi sed odio labore vero reiciendis facere accusamus molestias eaque impedit, consequuntur quae fuga vitae fugit?</p>
-            </div> -->
-
-
-
+          <div class="p-5 bg-light">
+            <div class="col-md-12 text-center">
+              <img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="{{pet.pet_name}}'s Profile Picture" class="img-fluid mb-5">
+                <div class="post-meta">
+                  <span class="mr-2">{{pet.created}}</span> &bullet;
+                  <span class="ml-2"><span class="fa fa-comments"></span>{{comments_count}}</span>
+                </div>
+                <h1 class="mb-4">{{pet.pet_name}}</h1>
+                <p>Type: {% if pet.animal_type == 'D' %}Dog{% elif pet.animal_type == 'C' %}Cat{% endif %}</p>
+                <p>Gender: {% if pet.gender == 'M' %}Male{% elif pet.gender == 'F' %}Female{% elif pet.gender == 'O' %}Other{% endif %}</p>
+                <p>Age:  {{pet.age}} </p>
+                <p>Breed:  {{pet.breed}} </p>
+                <p>Description: {{pet.description}}</p>
+                <p> {% if pet.owner == request.user %}Your Pet{% else %}{{  pet.owner }}{% endif %}</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
+      </section>
+
+      <section class="pt-5 pb-5">
+        <div class="container">
+          <div class="col-md-12 text-center">
+            {% if comments %}
+              <h3 class="mb-5">Comments</h3>
+              {% for comm in comments %}
+              <div class="comment-body">
+              <h3>{{ comm.comment_writer }}</h3>
+              <div class="meta">{{comm.created}}</div>
+              <p>{{comm.comment}}</p>
+              </div>
+              {% endfor %}
+            {% else %}
+            <h3 class="mb-5">No Comments on this Profile Yet</h3>
+
+            {% endif %}
+          </div>
+          <div class="col-md-12 text-center">
+            <div class="comment-form-wrap pt-5">
+              <form method="POST" action="#" class="p-5 bg-light">
+                <h3 class="mb-5">Leave a comment</h3>
+                  {% csrf_token %}
+                  {{comment_form.as_p}}
+                <div class="form-group">
+                  <input type="submit" value="Post Comment" name="comment_form_submit" class="btn btn-primary">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+{% if pet.up_for_adoption == 'Y' and not pet.owner == request.user %}
+    <section class="pt-5 pb-5">
+      <div class="container">
+          <div class="p-5 bg-light">
+          <div class="col-md-12 text-center">
+            <h1>Request for Adoption</h1>
+          </div>
+        <div class="row blog-entries">
+          <div class="col-md-3"></div>
+          <div class="col-md-8">
+            <form action="#" method="post" class="form-group">
+              <table cellpadding=10>
+              {% csrf_token %}
+              {{ adoption_form }}</table>
+              <div class="row">
+
+                <div class="col-md-2"></div>
+                  <input type="submit" name="adoption_form_submit" value="Send Adoption Request" class="btn btn-primary">
+                </div></div>
+              </form>
+            </div>
+          </div>
+        </div>
     </section>
-    <!-- END section -->
+{% endif %}
 
     <footer class="site-footer">
         <div class="container">
@@ -114,7 +165,6 @@
                   </div>
                 </div>
             </div>
-        </div>
     </footer>
       <!-- END footer -->
 

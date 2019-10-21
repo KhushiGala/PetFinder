@@ -28,25 +28,29 @@
               </div>
           </div>
           <nav class="navbar navbar-expand-md  navbar-light bg-light">
-                <div class="container">
-                  <div class="collapse navbar-collapse" id="navbarMenu">
-                      <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                              <a class="nav-link" href="explore.html">Explore</a>
-                        </li>
+              <div class="container">
+                <div class="collapse navbar-collapse" id="navbarMenu">
+                    <ul class="navbar-nav mx-auto">
                       <li class="nav-item">
-                              <a class="nav-link active" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="index.html">Account</a>
-                        </li>
-                      </ul>
-                    </div>
-                </div>
-            </nav>
+                            <a class="nav-link" href="{% url 'explore' %}">Explore</a>
+                      </li>
+                    <li class="nav-item">
+                            <a class="nav-link active" href="#">About</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'pet_register' %}">Add Pet</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'adoption_explore' %}">Adopt</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="{% url 'myaccount' user_username=request.user.username pet_id='0' %}">Account</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <a href={%  url 'user_logout' %}>Logout</a>
+              </div>
+          </nav>
         </header>
       <!-- END header -->
 
@@ -58,9 +62,37 @@
             <div class="row">
               <div class="col-md-12">
                 <h2 class="mb-4">Hi There!</h2>
-                <p class="mb-5"><img src="{% static 'images/Lovely-babies-babies-pets-and-animals-16771666-1024-768.jpg" alt="Image placeholder" class="img-fluid"></p>
+                <p class="mb-5"><img src="{% static 'images/Lovely-babies-babies-pets-and-animals-16771666-1024-768.jpg' %}" alt="Image placeholder" class="img-fluid"></p>
                 <h3>About Us</h3>
-          <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India. Organizations maintain their own home pages and available-pet databases</p>
+          <p>Petfinder is an online, searchable database of animals who need homes.
+            It is also a directory of nearly 11,000 animal shelters and adoption organizations across India.
+            Organizations maintain their own home pages and available-pet databases
+          </p>
+              <p>
+            10 Things You Might Want to Know About Dog Adoption</p>
+            <ul>
+
+
+            <li>Tips for the First Week With Your Newly Adopted Dog</li>
+
+            <li>How to Introduce A Puppy to an Adult Dog</li>
+
+            <li>The Myths of Dog Adoption</li>
+
+            <li>Some Rescue Dogs Are Already Trained for a Home</li>
+
+            <li>Rescues Are Pros at Matching You With the Right Dog Adoption</li>
+
+            <li>Rescues Have Plenty of Purebred Dogs</li>
+
+            <li>Dog Adoption Will Build Life Lessons for Kids of All Ages</li>
+
+            <li>How to Plan for a Dog Friendly Schedule</li>
+
+            <li>How to Prepare Your Budget for Dog Adoption</li>
+
+            <li>FAQ for Dog Veterinarian Visits</li>
+</p>
               </div>
             </div>
           </div>
@@ -76,14 +108,14 @@
           <p>Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 11,000 animal shelters and adoption organizations across India.</p>
               </div>
 
+
                 <div class="col-md-5"></div>
           <div class="col-md-2">
                       <h3>Social</h3>
                       <ul class="list-unstyled footer-social">
-                          <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                          <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
-                          <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
-                          <li><a href="#"><span class="fa fa-snapchat"></span> Snapchat</a></li>
+                          <li><a href="https://twitter.com/petfinder?lang=en"><span class="fa fa-twitter"></span> Twitter</a></li>
+                          <li><a href="https://www.facebook.com/Petfinder/"><span class="fa fa-facebook"></span> Facebook</a></li>
+                          <li><a href="https://www.instagram.com/petfinder/?hl=en"><span class="fa fa-instagram"></span> Instagram</a></li>
                       </ul>
                   </div>
                 </div>

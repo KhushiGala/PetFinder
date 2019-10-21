@@ -1,19 +1,12 @@
 from django.shortcuts import render
-from .forms import UserRegisterForm, PetRegisterForm
+from .forms import UserRegisterForm, PetRegisterForm, CommentForm, AdoptionRequestForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import MyUser, Pet, Comments
+from .models import MyUser, Pet, Comments, Adoption_requests
 
-
-
-def my_account(request):
-    pass
-
-def pet_adoption_request(request, pet_id):
-    pass
 
 
 def user_login(request):
@@ -41,9 +34,42 @@ def user_login(request):
 
 @login_required
 def pet_info(request, pet_id):
+    if request.method == 'POST':
+        if 'comment_form_submit' in request.POST:
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid:
+                mycomment = comment_form.save(commit=False)
+                mycomment.comment_writer = request.user
+                mycomment.pet_id = Pet.objects.filter(id=pet_id)[0]
+                mycomment.save()
+        else:
+            adoption_form = AdoptionRequestForm(request.POST)
+            if adoption_form.is_valid:
+                myadoptionrequest = adoption_form.save(commit=False)
+                myadoptionrequest.pet = Pet.objects.filter(id=pet_id)[0]
+                myadoptionrequest.requester = request.user
+                myadoptionrequest.save()
+    new_comment_form = CommentForm()
+    new_adoption_form = AdoptionRequestForm()
     mypet = Pet.objects.get(id=pet_id)
-    comments_count = Comments.objects.filter(pet_id=pet_id).count()
-    return render(request, 'blog-single.html', {'pet':mypet, 'comments_count':comments_count})
+    comments = Comments.objects.filter(pet_id=pet_id).order_by('created')
+    comments_count = comments.count()
+    return render(request, 'blog-single.html', {'pet':mypet, 'comments_count':comments_count, 'comments':comments, 'comment_form':new_comment_form, 'adoption_form':new_adoption_form})
+
+@login_required
+def myaccount(request, user_username, pet_id):
+    user = MyUser.objects.filter(username=user_username)[0]
+    pet_list = Pet.objects.filter(owner=user)
+    if pet_id=='0':
+        pet_selected = False
+        adoption_request_list = Adoption_requests.objects.none()
+    else:
+        pet_selected = True
+        adoption_request_list = Adoption_requests.objects.filter(pet=pet_id).order_by('created')
+    # for p in pet_list:
+    #     instance = Adoption_requests.objects.filter(pet=p)
+    #     adoption_request_list = adoption_request_list.union(instance)
+    return render(request, 'myaccount.html', context={'pet_list':pet_list , 'adoption_list':adoption_request_list, 'pet_selected':pet_selected})
 
 @login_required
 def explore(request):
@@ -112,3 +138,10 @@ def user_register(request):
     else:
         form = UserRegisterForm()
         return render(request, 'SignUp.html',{'form':form})
+
+def user_logout(request):
+   logout(request)
+   return HttpResponseRedirect(reverse('user_login'))
+
+def about(request):
+    return render(request, 'about.html')
