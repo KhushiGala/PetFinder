@@ -76,7 +76,7 @@ def myaccount(request, user_username, pet_id):
     #     instance = Adoption_requests.objects.filter(pet=p)
     #     adoption_request_list = adoption_request_list.union(instance)
     my_requests = Adoption_requests.objects.filter(requester=user).order_by('created')
-    return render(request, 'myaccount.html', context={'pet_list':pet_list , 'adoption_list':adoption_request_list,'my_requests':my_requests, 'pet_selected':pet_selected })
+    return render(request, 'myaccount.html', context={'pet_list':pet_list , 'adoption_list':adoption_request_list, 'my_requests':my_requests, 'pet_selected':pet_selected })
 
 @login_required
 def explore(request):
