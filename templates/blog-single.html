@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Paw</title>
+    <title>Pet Finder</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,7 +29,7 @@
                 <div class="row pt-5">
                     <div class="col-12 text-center">
                       <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                      <h1 class="site-logo"><a href="index.html">Paw</a></h1>
+                      <h1 class="site-logo"><a href="index.html">Pet Finder</a></h1>
                   </div>
                 </div>
               </div>
@@ -107,24 +107,29 @@
 
             {% endif %}
           </div>
-          <div class="col-md-12 text-center">
-            <div class="comment-form-wrap pt-5">
-              <form method="POST" action="#" class="p-5 bg-light">
-                <h3 class="mb-5">Leave a comment</h3>
-                  {% csrf_token %}
-                  {{comment_form.as_p}}
-                <div class="form-group">
-                  <input type="submit" value="Post Comment" name="comment_form_submit" class="btn btn-primary">
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
       </section>
 
 
 
 {% if pet.up_for_adoption == 'Y' and not pet.owner == request.user %}
+
+<section class="pt-5 pb-5">
+  <div class="container">
+    <div class="col-md-12 text-center">
+      <div class="comment-form-wrap pt-5">
+        <form method="POST" action="#" class="p-5 bg-light">
+          <h3 class="mb-5">Leave a comment</h3>
+            {% csrf_token %}
+            {{comment_form.as_p}}
+          <div class="form-group">
+            <input type="submit" value="Post Comment" name="comment_form_submit" class="btn btn-primary">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
     <section class="pt-5 pb-5">
       <div class="container">
           <div class="p-5 bg-light">

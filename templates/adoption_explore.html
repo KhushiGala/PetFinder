@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Paw</title>
+    <title>Pet Finder</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
@@ -21,7 +21,7 @@
                 <div class="row pt-5">
                     <div class="col-12 text-center">
                       <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                      <h1 class="site-logo"><a href="{% url 'explore' %}">Paw</a></h1>
+                      <h1 class="site-logo"><a href="{% url 'explore' %}">Pet Finder</a></h1>
                   </div>
                 </div>
               </div>
@@ -64,7 +64,8 @@
         </header>
         <!-- END header -->
 
-  {%  if pet_list %}
+        {%  if pet_list %}
+
   <section class="site-section pt-5 pb-5">
         <div class="container">
             <div class="row">
@@ -72,10 +73,12 @@
                  <h2 class="mb-4">Pets Up For Adoption</h2>
               </div>
           </div>
+
           <div class="row blog-entries">
             <div class="col-md-12 text-center">
                 <div class="row">
             {% for pet in pet_list %}
+            {% if not pet.owner == request.user %}
             <div class="col-md-3">
               <a href={% url 'pet_info' pet_id=pet.id %} class="blog-entry element-animate" data-animate-effect="fadeIn">
                   <img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="Image placeholder">
@@ -87,10 +90,13 @@
                   </div>
                 </a>
             </div>
+            {% endif %}
             {% endfor %}
-
+          </div>
+          </div>
             </div>
           </section>
+                  {% endif %}
           <footer class="site-footer">
               <div class="container">
                   <div class="row mb-2">
@@ -114,7 +120,6 @@
               </div>
           </footer>
     </div>
-    {% endif %}
 
     <!-- loader -->
     <div id="loader" class="show fullscreen">
