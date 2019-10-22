@@ -116,7 +116,7 @@
               </div>
             </div>
             </section>
-            <!-- <section class="site-section pt-5">
+            <section class="site-section pt-5">
               <div class="container">
               <div class="row blog-entries">
                 <div class="col-md-12 text-center">
@@ -124,11 +124,29 @@
                     <div class="col-md-12 text-center">
                       <h2 class="mb-4">Requests made by me</h2>
                     </div>
+                    {% if my_requests %}
+                        {% for req in my_requests %}
+                        <div class="col-md-12 text-center">
+                          <div class="post-entry-horzontal">
+                            <span class="text">
+                            <h4>{{req.pet}}</h4>
+                            <div class="post-meta">
+                            <span class="mr-2">{{req.created}}</span>
+                            <!-- <span class="ml-2">{{adoption.phone_no}}</span> -->
+                            </div>
+                            <h4>{{req.description_message}}</h4>
+                            </span>
+                          </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <h4 class="mb-4">No Requests sent</h4>
+                    {% endif %}
                   </div>
                 </div>
               </div>
               </div>
-              </section> -->
+              </section>
               <footer class="site-footer">
                   <div class="container">
                       <div class="row mb-2">

@@ -6,7 +6,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import MyUser, Pet, Comments, Adoption_requests
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def user_login(request):
@@ -49,6 +50,11 @@ def pet_info(request, pet_id):
                 myadoptionrequest.pet = Pet.objects.filter(id=pet_id)[0]
                 myadoptionrequest.requester = request.user
                 myadoptionrequest.save()
+                # subject = 'Pet request received'
+                # message = 'You have sent a request for pet adoption'
+                # email_from = settings.EMAIL_HOST_USER
+                # receipient_list  = [myadoptionrequest.requester.email]
+                # send_mail(subject, message, email_from, receipient_list)
     new_comment_form = CommentForm()
     new_adoption_form = AdoptionRequestForm()
     mypet = Pet.objects.get(id=pet_id)
@@ -69,7 +75,8 @@ def myaccount(request, user_username, pet_id):
     # for p in pet_list:
     #     instance = Adoption_requests.objects.filter(pet=p)
     #     adoption_request_list = adoption_request_list.union(instance)
-    return render(request, 'myaccount.html', context={'pet_list':pet_list , 'adoption_list':adoption_request_list, 'pet_selected':pet_selected })
+    my_requests = Adoption_requests.objects.filter(requester=user).order_by('created')
+    return render(request, 'myaccount.html', context={'pet_list':pet_list , 'adoption_list':adoption_request_list,'my_requests':my_requests, 'pet_selected':pet_selected })
 
 @login_required
 def explore(request):
@@ -152,3 +159,12 @@ def delete_pet(request, pet_id):
 
 def about(request):
     return render(request, 'about.html')
+
+
+# def email(request):
+#     subject = 'Pet request received'
+#     message = 'You have received a request for pet adoption'
+#     email_from = settings.EMAIL_HOST_USER
+#     receipient_list = ['']
+#     send_mail(subject, message, email_from, receipient_list)
+#     return HttpResponseRedirect(reverse('explore'))
