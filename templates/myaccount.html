@@ -78,6 +78,12 @@
                     </div>
                   </div>
                 </div>
+                {% else %}
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                     <h4 class="mb-4">No pets registered</h4>
+                  </div>
+              </div>
                 {% endif %}
             </div>
         </section>
@@ -92,7 +98,7 @@
                               {% for req in my_requests %}
                               <div class="pt-5 pb-5">
                               <div class="p-5 bg-light">
-                              <h2>Pet name: {{req.pet}}</h2>
+                              <h4>Pet name: {{req.pet}}</h4>
                               <!-- <h2>Mesaage: {{req.description_message}}</h2> -->
                             </div>
                           </div>
@@ -108,9 +114,9 @@
                 {% for adoption in adoption_list %}
                 <div class="pt-5 pb-5">
                 <div class="p-5 bg-light">
-                  <h2>Requester: {{adoption.requester}}</h2>
+                  <h3>Requester: {{adoption.requester}}</h3>
                   <!-- <h2>message: {{adoption.description_message}}</h2> -->
-                  <h2>Contact: {{adoption.phone_no}}</h2>
+                  <h4>Contact: {{adoption.phone_no}}</h4>
                 </div>
               </div>
                 {% endfor %}

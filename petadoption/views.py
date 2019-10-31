@@ -3,6 +3,7 @@ from .forms import UserRegisterForm, PetRegisterForm, CommentForm, AdoptionReque
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import MyUser, Pet, Comments, Adoption_requests
@@ -50,11 +51,6 @@ def pet_info(request, pet_id):
                 myadoptionrequest.pet = Pet.objects.filter(id=pet_id)[0]
                 myadoptionrequest.requester = request.user
                 myadoptionrequest.save()
-                # subject = 'Pet request received'
-                # message = 'You have sent a request for pet adoption'
-                # email_from = settings.EMAIL_HOST_USER
-                # receipient_list  = [myadoptionrequest.requester.email]
-                # send_mail(subject, message, email_from, receipient_list)
     new_comment_form = CommentForm()
     new_adoption_form = AdoptionRequestForm()
     mypet = Pet.objects.get(id=pet_id)
@@ -80,8 +76,14 @@ def myaccount(request, user_username, pet_id):
 
 @login_required
 def explore(request):
-    pet_list = Pet.objects.order_by('?')[:16]
-    #pet_list = Pet.objects.filter(up_for_adoption='Y').order_by('?')[:16]
+    pet_list = Pet.objects.all()
+    query = request.GET.get("q")
+    if query:
+        pet_list = pet_list.filter(
+        Q(pet_name__icontains=query)|
+        Q(animal_type__icontains=query)|
+        Q(breed__icontains=query)
+        )
     return render(request, 'explore.html', context={'pet_list':pet_list})
 
 

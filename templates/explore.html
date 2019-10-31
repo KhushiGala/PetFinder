@@ -138,9 +138,28 @@
           {%  if pet_list %}
           <div class="row blog-entries">
             <div class="col-md-12 text-center">
+              <div class="row">
+                <div class="col-md-4"></div>
+              <div class="col-md-4 text-center">
+                <form action="" class="search-form" method="GET" >
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-10">
+                    <input type="text" class="form-control" id="s" placeholder="Find here" name='q' value='{{ request.GET.q }}'>
+                  </div>
+                  <div class="col-md-2">
+                  <input type="submit" value="Search" class="btn btn-primary">
+                </div>
+                  </div>
+
+
+                  </div>
+                </form>
+              </div>
+              </div>
                 <div class="row">
                   {% for pet in pet_list %}
-                  {% if not pet.owner == request.user %}
+
                   <div class="col-md-3">
                     <a href={% url 'pet_info' pet_id=pet.id %} class="blog-entry element-animate" data-animate-effect="fadeIn">
                       <img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="Image placeholder">
@@ -149,7 +168,7 @@
                       </div>
                     </a>
                   </div>
-                      {% endif %}
+
                   {% endfor %}
                 </div>
               </div>
