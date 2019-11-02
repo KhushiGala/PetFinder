@@ -97,9 +97,12 @@
                             {% if my_requests %}
                               {% for req in my_requests %}
                               <div class="pt-5 pb-5">
-                              <div class="p-5 bg-light">
-                              <h4>Pet name: {{req.pet}}</h4>
-                              <!-- <h2>Mesaage: {{req.description_message}}</h2> -->
+                              <div class="p-5">
+                              <h3>Pet name: {{req.pet}}</h2>
+                              <a href="{% url 'pet_info' pet_id=req.pet.id %}" class="blog-entry element-animate" data-animate-effect="fadeIn">
+                                <img src="{{MEDIA_URL}}{{req.pet.pet_profile_image.url}}" alt="{{req.pet.pet_name}}">
+                              </a>
+                              <h5>Description Message: {{req.description_message}}</h2>
                             </div>
                           </div>
                             {% endfor %}

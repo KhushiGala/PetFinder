@@ -135,7 +135,7 @@
                  <h2 class="mb-4">All Pets</h2>
               </div>
           </div>
-          {%  if pet_list %}
+
           <div class="row blog-entries">
             <div class="col-md-12 text-center">
               <div class="row">
@@ -151,16 +151,15 @@
                   <input type="submit" value="Search" class="btn btn-primary">
                 </div>
                   </div>
-
-
                   </div>
                 </form>
               </div>
               </div>
+                {%  if pet_list %}
                 <div class="row">
                   {% for pet in pet_list %}
 
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <a href={% url 'pet_info' pet_id=pet.id %} class="blog-entry element-animate" data-animate-effect="fadeIn">
                       <img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="Image placeholder">
                       <div class="blog-content-body">

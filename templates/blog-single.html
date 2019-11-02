@@ -82,7 +82,7 @@
                 <p>Your Pet</p>
                 <p><a href={%  url 'delete_pet' pet_id=pet.id %}>Delete Pet</a></p>
                 {% else %}
-                <p>{{  pet.owner }}</p>
+                <p>Owner :{{  pet.owner }}</p>
                 {% endif %}
               </div>
             </div>
@@ -111,7 +111,6 @@
 
 
 
-{% if pet.up_for_adoption == 'Y' and not pet.owner == request.user %}
 
 <section class="pt-5 pb-5">
   <div class="container">
@@ -129,6 +128,7 @@
     </div>
   </div>
 </section>
+{% if pet.up_for_adoption == 'Y' and not pet.owner == request.user %}
 
     <section class="pt-5 pb-5">
       <div class="container">

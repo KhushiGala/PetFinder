@@ -64,21 +64,54 @@
         </header>
         <!-- END header -->
 
-        {%  if pet_list %}
+        <section class="site-section pt-5 pb-5">
+          <div class="row">
+            <div class="col-md-12 text-center">
+               <h2 class="mb-4">Filters</h2>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3"></div>
+        <div class="col-md-6 text-center">
+          <form action="" class="search-form" method="GET" >
+            <div class="form-group">
+              <div class="rowpt-3">
+              <input type="text" class="form-control" id="s" placeholder="Find here" name='q' value='{{ request.GET.q }}'>
+        </div>
+        <div class="row pt-3">
+          <div class="col-md-3 text-center">Type:
+          </div>
+             <div class="col-md-2 text-center">
+             <input type="checkbox" class="form-control" name="dog_checkbox" {% if dog_enabled %}checked="checked"{% endif %}>
+              </div>
+              <div class="col-md-3 text-center">Dogs
+           </div>
+            <div class="col-md-2 text-center">
+             <input type="checkbox" class="form-control" name="cat_checkbox" {% if cat_enabled %}checked="checked"{% endif %}>
+           </div>
+             <div class="col-md-2 text-center">Cats</div>
+               </div>
+      <div class="row pt-3">
+        <div class="col-md-12 text-center">
+        <input type="submit" value="Search" class="btn btn-primary"></div>
+    </div>
+        </div>
+          </form>
+        </div>
+      </section>
 
-  <section class="site-section pt-5 pb-5">
+  <section class="site-section py-sm">
         <div class="container">
             <div class="row">
               <div class="col-md-12 text-center">
                  <h2 class="mb-4">Pets Up For Adoption</h2>
               </div>
           </div>
-
           <div class="row blog-entries">
             <div class="col-md-12 text-center">
+                {%  if pet_list %}
                 <div class="row">
             {% for pet in pet_list %}
-            {% if not pet.owner == request.user %}
             <div class="col-md-3">
               <a href={% url 'pet_info' pet_id=pet.id %} class="blog-entry element-animate" data-animate-effect="fadeIn">
                   <img src="{{MEDIA_URL}}{{pet.pet_profile_image.url}}" alt="Image placeholder">
@@ -90,7 +123,6 @@
                   </div>
                 </a>
             </div>
-            {% endif %}
             {% endfor %}
           </div>
           </div>
@@ -117,7 +149,6 @@
                         </div>
                       </div>
                   </div>
-              </div>
           </footer>
     </div>
 

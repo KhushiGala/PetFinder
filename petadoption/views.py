@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 
+email_from = settings.EMAIL_HOST_USER
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -51,12 +52,22 @@ def pet_info(request, pet_id):
                 myadoptionrequest.pet = Pet.objects.filter(id=pet_id)[0]
                 myadoptionrequest.requester = request.user
                 myadoptionrequest.save()
+                owner_email = MyUser.objects.get(username=myadoptionrequest.pet.owner.username).email
+                requester_email = request.user.email
+                subject_owner = 'Adoption Request for your pet'
+                subject_receiver = 'Adoption Request made by you'
+                owner_message = myadoptionrequest.pet.pet_name+' has been requested for adoption by '+request.user.first_name+'. Open the website to view adoption request now.'
+                receiver_message = 'You have requested for the adoption of '+myadoptionrequest.pet.pet_name+'.'
+                owner_receipent = [owner_email]
+                receiver_receipent = [requester_email]
+                send_mail(subject_owner, owner_message, email_from, owner_receipent)
+                send_mail(subject_receiver, receiver_message, email_from, receiver_receipent)
     new_comment_form = CommentForm()
     new_adoption_form = AdoptionRequestForm()
     mypet = Pet.objects.get(id=pet_id)
     comments = Comments.objects.filter(pet_id=pet_id).order_by('created')
     comments_count = comments.count()
-    return render(request, 'blog-single.html', {'pet':mypet, 'comments_count':comments_count, 'comments':comments, 'comment_form':new_comment_form, 'adoption_form':new_adoption_form, 'delete_pet':delete_pet})
+    return render(request, 'blog-single.html', {'pet':mypet, 'comments_count':comments_count, 'comments':comments, 'comment_form':new_comment_form, 'adoption_form':new_adoption_form})
 
 @login_required
 def myaccount(request, user_username, pet_id):
@@ -68,29 +79,72 @@ def myaccount(request, user_username, pet_id):
     else:
         pet_selected = True
         adoption_request_list = Adoption_requests.objects.filter(pet=pet_id).order_by('created')
-    # for p in pet_list:
-    #     instance = Adoption_requests.objects.filter(pet=p)
-    #     adoption_request_list = adoption_request_list.union(instance)
     my_requests = Adoption_requests.objects.filter(requester=user).order_by('created')
     return render(request, 'myaccount.html', context={'pet_list':pet_list , 'adoption_list':adoption_request_list, 'my_requests':my_requests, 'pet_selected':pet_selected })
 
 @login_required
 def explore(request):
-    pet_list = Pet.objects.all()
     query = request.GET.get("q")
     if query:
-        pet_list = pet_list.filter(
-        Q(pet_name__icontains=query)|
-        Q(animal_type__icontains=query)|
-        Q(breed__icontains=query)
-        )
+        pet_list = Pet.objects.all().filter(
+            Q(pet_name__icontains=query)|
+            Q(animal_type__icontains=query[0])|
+            Q(breed__icontains=query)
+            )[:16]
+    else:
+        pet_list = Pet.objects.all().order_by('?')
     return render(request, 'explore.html', context={'pet_list':pet_list})
 
 
+# @login_required
+# def adoption_explore(request):
+#     pet_list = Pet.objects.filter(up_for_adoption='Y').exclude(owner=request.user).order_by('?')
+#     query = request.GET.get("q")
+#     gen = request.GET.get("gender")
+#     ty = request.GET.get("type")
+#     if query or 'gen' or 'type' :
+#         pet_list = pet_list.filter(
+#             Q(pet_name__icontains=query)|
+#             Q(breed__icontains=query)
+#             )
+#     if gen:
+#         pet_list = pet_list.filter(
+#             Q(gender__icontains=gen[0])
+#             )
+#     if ty:
+#         pet_list = pet_list.filter(
+#             Q(animal_type__icontains=ty[0])
+#             )
+#     else:
+#         pet_list = Pet.objects.filter(up_for_adoption='Y').exclude(owner=request.user).order_by('?')
+#         messages.success(request, 'Pet not found')
+#     return render(request, 'adoption_explore.html', context={'pet_list':pet_list})
+
 @login_required
 def adoption_explore(request):
-    pet_list = Pet.objects.filter(up_for_adoption='Y').order_by('?')[:16]
-    return render(request, 'adoption_explore.html', context={'pet_list':pet_list})
+    dog_enabled = bool(request.GET.get('dog_checkbox'))
+    cat_enabled = bool(request.GET.get('cat_checkbox'))
+    all_pets = Pet.objects.filter(up_for_adoption='Y').exclude(owner=request.user)
+    pet_list= Pet.objects.none()
+    query = request.GET.get("q")
+    if query or 'dog_checkbox' in request.GET or 'cat_checkbox' in request.GET:
+        if query:
+            if 'dog_checkbox' in request.GET:
+                pet_list |= all_pets.filter(Q(pet_name__icontains=query)|Q(breed__icontains=query),Q(animal_type=Pet.dog))
+            elif 'cat_checkbox' in request.GET:
+                pet_list |= all_pets.filter(Q(pet_name__icontains=query)|Q(breed__icontains=query),Q(animal_type=Pet.cat))
+            else:
+                pet_list |= all_pets.filter(Q(pet_name__icontains=query)|Q(breed__icontains=query))
+        else:
+            if 'dog_checkbox' in request.GET:
+                pet_list |= all_pets.filter(Q(animal_type=Pet.dog))
+            if 'cat_checkbox' in request.GET:
+                pet_list |= all_pets.filter(Q(animal_type=Pet.cat))
+    else:
+        pet_list = all_pets
+    # pet_list = pet_list.order_by('?')[:16]
+    return render(request, 'adoption_explore.html', context={'pet_list':pet_list,'dog_enabled':dog_enabled, 'cat_enabled':cat_enabled})
+
 
 
 @login_required
@@ -131,8 +185,6 @@ def user_register(request):
                 messages.error(request, 'Username exists')
                 return render(request,'SignUp.html',{'form':user_form})
             except user.DoesNotExist:
-                # if user is None:
-                    #user_form.save(commit=True)
                 my_user = user_form.save(commit=False)
                 my_user.set_password(user_form.cleaned_data['password'])
                 my_user.save()
